@@ -28,8 +28,12 @@ namespace QualityApp.API.Controllers
         public async Task<IActionResult> Register(EmployeeRegisterDto employeeRegisterDto)
         {
             employeeRegisterDto.UserName = employeeRegisterDto.UserName.ToLower();
-            if (await _repo.EmployeeExists(employeeRegisterDto.UserName))
+            employeeRegisterDto.Email = employeeRegisterDto.Email.ToLower();
+
+            if (await _repo.EmployeeExistsUserName(employeeRegisterDto.UserName))
                 return BadRequest("اسم المستخدم مستجل مسبقا");
+            if (await _repo.EmployeeExistsEmail(employeeRegisterDto.Email))
+                return BadRequest("البريد الالكتروني مستجل مسبقا");
             var employeeToCreate = new Employee
             {
                 UserName = employeeRegisterDto.UserName,

@@ -12,9 +12,17 @@ namespace QualityApp.API.Data
         {
             _context = context;
         }
-        public async Task<bool> EmployeeExists(string userName)
+        public async Task<bool> EmployeeExistsUserName(string userName)
         {
-            if(await _context.Employees.AnyAsync(x=>x.UserName == userName))return true;
+            var result = await _context.Employees.AnyAsync(x=>x.UserName == userName);
+            if(result)return true;
+            return false;
+        }
+
+        public async Task<bool> EmployeeExistsEmail(string email)
+        {
+            var result = await _context.Employees.AnyAsync(x=>x.Email == email);
+            if(result)return true;
             return false;
         }
 

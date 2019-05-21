@@ -7,6 +7,7 @@ namespace QualityApp.API.Data
     {
          Task<Employee> Register (Employee employee, string password);
          Task<Employee> Login (string userName, string password);
-         Task<bool> EmployeeExists (string userName);
+         Task<bool> EmployeeExistsUserName (string userName);
+         Task<bool> EmployeeExistsEmail (string email);
     }
 }
